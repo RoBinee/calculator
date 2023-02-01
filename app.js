@@ -1,20 +1,16 @@
-// Press a number button
-// Display the number on the screen
-// When you press a operator button, stop and convert it to string
-// Store the value in variable
 const numberBtns = document.querySelectorAll(".number");
 const result = document.querySelector(".result");
 let firstNum = "";
 let secondNum = "";
-let operation = "";
+let signInput = "";
 let stringOfResult = "";
 
 numberBtns.forEach((numberBtn)=>{
     numberBtn.addEventListener("click", ()=>{
         const num = numberBtn.dataset.value;
-        if(!operation){
+        if(!signInput){
             firstNum += num;
-        }else if(operation){
+        }else if(signInput){
             //store second num
             secondNum += num;
         }
@@ -36,12 +32,12 @@ signBtns.forEach((signBtn)=>{
             //click sign btn after complete writing secondNUm
             secondNum = Number(secondNum);
             if(sign === "equal"){
-                stringOfResult = operate(operation, firstNum, secondNum);
+                stringOfResult = operate(signInput, firstNum, secondNum);
                 result.textContent = stringOfResult;
             }else{
-                firstNum = operate(operation, firstNum, secondNum);
+                firstNum = operate(signInput, firstNum, secondNum);
                 secondNum = "";
-                operation = "";
+                signInput = "";
 
                 stringOfResult = firstNum;
                 result.textContent = stringOfResult;
@@ -50,19 +46,19 @@ signBtns.forEach((signBtn)=>{
 
         switch(sign){
             case "add":
-                operation = add;
+                signInput = add;
                 stringOfResult += " + "
             break;
             case "subtract":
-                operation = subtract;
+                signInput = subtract;
                 stringOfResult += " - "
             break;
             case "multiply":
-                operation = multiply;
+                signInput = multiply;
                 stringOfResult += " × "
             break;
             case "divide":
-                operation = divide;
+                signInput = divide;
                 stringOfResult += " ÷ "
             break;
         }
