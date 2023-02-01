@@ -29,13 +29,22 @@ const result = document.querySelector(".result");
 let firstNum = "";
 let secondNum = "";
 let operation = "";
+let stringOfResult = "";
 numberBtns.forEach((numberBtn)=>{
     numberBtn.addEventListener("click", ()=>{
         const num = numberBtn.dataset.value;
-
-        firstNum += num;
-        result.textContent = firstNum;
-        //if operation is exist..store secondNum
+        if(!operation){
+            firstNum += num;
+            // stringOfResult += num;
+            // result.textContent = firstNum;
+        }else if(operation){
+            //store second num
+            secondNum += num;
+            // stringOfResult += num;
+            // result.textContent = secondNum;
+        }
+        stringOfResult += num;
+        result.textContent = stringOfResult;
     })
 })
 
@@ -50,18 +59,26 @@ signBtns.forEach((signBtn)=>{
         switch(sign){
             case "add":
                 operation = add;
+                stringOfResult += "+"
+                result.textContent = stringOfResult;
             break;
             case "subtract":
                 operation = subtract;
+                stringOfResult += "-"
+                result.textContent = stringOfResult;
             break;
             case "multiply":
                 operation = multiply;
+                stringOfResult += "×"
+                result.textContent = stringOfResult;
             break;
             case "divide":
                 operation = divide;
+                stringOfResult += "÷"
+                result.textContent = stringOfResult;
             break;
             case "equal":
-                console.log("equal")
+                console.log("equal");
             break;
         }
     })
