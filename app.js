@@ -1,25 +1,3 @@
-//add subtract multiply divide
-const add = (num1, num2)=>{
-    return num1 + num2;
-}
-
-const subtract = (num1, num2)=>{
-    return num1 - num2;
-}
-
-const multiply = (num1, num2)=>{
-    return num1 * num2;
-}
-
-const divide = (num1, num2)=>{
-    return num1 / num2;
-}
-
-function operate(operator, num1, num2){
-    console.log(operator(num1, num2));
-}
-
-
 // Press a number button
 // Display the number on the screen
 // When you press a operator button, stop and convert it to string
@@ -53,7 +31,7 @@ const signBtns = document.querySelectorAll(".sign");
 signBtns.forEach((signBtn)=>{
     signBtn.addEventListener("click", ()=>{
         const sign = signBtn.dataset.value;
-        if(firstNum){
+        if(typeof firstNum === "string"){
             //if firstNum is existed
             firstNum = Number(firstNum);
         }
@@ -75,9 +53,36 @@ signBtns.forEach((signBtn)=>{
             stringOfResult += " ÷ "
             
         }else if(sign === "equal"){
-            console.log("equal");            
+            //convert num2 to number
+            //do calculate and display it
+            secondNum = Number(secondNum);
+            stringOfResult = operate(operation, firstNum, secondNum);
         }
          result.textContent = stringOfResult;
 
     })
 })
+
+
+const add = (num1, num2)=>{
+    return num1 + num2;
+}
+
+const subtract = (num1, num2)=>{
+    return num1 - num2;
+}
+
+const multiply = (num1, num2)=>{
+    return num1 * num2;
+}
+
+const divide = (num1, num2)=>{
+    return num1 / num2;
+}
+
+function operate(operator, num1, num2){
+    firstNum = operator(num1, num2);
+    secondNum = ""
+    operation = "";
+    return firstNum;
+}
