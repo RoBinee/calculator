@@ -33,66 +33,40 @@ signBtns.forEach((signBtn)=>{
         }
 
         if(firstNum && secondNum){
+            //click sign btn after complete writing secondNUm
             secondNum = Number(secondNum);
-
             if(sign === "equal"){
                 stringOfResult = operate(operation, firstNum, secondNum);
                 result.textContent = stringOfResult;
-                initialize()
             }else{
                 firstNum = operate(operation, firstNum, secondNum);
                 secondNum = "";
                 operation = "";
 
-                //don't use dataset, use textcontent
-
                 stringOfResult = firstNum;
                 result.textContent = stringOfResult;
             }
-            // = -> display the result
-            // the others -> continue calculate
-        }else{
-            switch(sign){
-                case "add":
-                    operation = add;
-                    stringOfResult += " + "
-                break;
-                case "subtract":
-                    operation = subtract;
-                    stringOfResult += " - "
-                break;
-                case "multiply":
-                    operation = multiply;
-                    stringOfResult += " × "
-                break;
-                case "divide":
-                    operation = divide;
-                    stringOfResult += " ÷ "
-                break;
-            }
-            result.textContent = stringOfResult;
         }
 
-        // if(sign === "add"){
-        //     operation = add;
-        //     stringOfResult += " + "
-
-        // }else if(sign === "subtract"){
-        //     operation = subtract;
-        //     stringOfResult += " - "
-
-        // }else if(sign === "multiply"){
-        //     operation = multiply;
-        //     stringOfResult += " × "
-            
-        // }else if(sign === "divide"){
-        //     operation = divide;
-        //     stringOfResult += " ÷ "
-            
-        // }else if(sign === "equal"){
-        //     stringOfResult = operate(operation, firstNum, secondNum);
-        // }
-        //  result.textContent = stringOfResult;
+        switch(sign){
+            case "add":
+                operation = add;
+                stringOfResult += " + "
+            break;
+            case "subtract":
+                operation = subtract;
+                stringOfResult += " - "
+            break;
+            case "multiply":
+                operation = multiply;
+                stringOfResult += " × "
+            break;
+            case "divide":
+                operation = divide;
+                stringOfResult += " ÷ "
+            break;
+        }
+            result.textContent = stringOfResult;
     })
 })
 
@@ -114,12 +88,5 @@ const divide = (num1, num2)=>{
 }
 
 function operate(operator, num1, num2){
-    const result = operator(num1, num2);
-    return result;
-}
-function initialize(){
-    firstNum = "";
-    secondNum = "";
-    operation = "";
-    stringOfResult = "";
+    return operator(num1, num2);
 }
