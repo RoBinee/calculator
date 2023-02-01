@@ -30,6 +30,7 @@ let firstNum = "";
 let secondNum = "";
 let operation = "";
 let stringOfResult = "";
+
 numberBtns.forEach((numberBtn)=>{
     numberBtn.addEventListener("click", ()=>{
         const num = numberBtn.dataset.value;
@@ -56,30 +57,27 @@ signBtns.forEach((signBtn)=>{
             //if firstNum is existed
             firstNum = Number(firstNum);
         }
-        switch(sign){
-            case "add":
-                operation = add;
-                stringOfResult += "+"
-                result.textContent = stringOfResult;
-            break;
-            case "subtract":
-                operation = subtract;
-                stringOfResult += "-"
-                result.textContent = stringOfResult;
-            break;
-            case "multiply":
-                operation = multiply;
-                stringOfResult += "×"
-                result.textContent = stringOfResult;
-            break;
-            case "divide":
-                operation = divide;
-                stringOfResult += "÷"
-                result.textContent = stringOfResult;
-            break;
-            case "equal":
-                console.log("equal");
-            break;
+
+        if(sign === "add"){
+            operation = add;
+            stringOfResult += " + "
+
+        }else if(sign === "subtract"){
+            operation = subtract;
+            stringOfResult += " - "
+
+        }else if(sign === "multiply"){
+            operation = multiply;
+            stringOfResult += " × "
+            
+        }else if(sign === "divide"){
+            operation = divide;
+            stringOfResult += " ÷ "
+            
+        }else if(sign === "equal"){
+            console.log("equal");            
         }
+         result.textContent = stringOfResult;
+
     })
 })
