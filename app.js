@@ -14,13 +14,9 @@ numberBtns.forEach((numberBtn)=>{
         const num = numberBtn.dataset.value;
         if(!operation){
             firstNum += num;
-            // stringOfResult += num;
-            // result.textContent = firstNum;
         }else if(operation){
             //store second num
             secondNum += num;
-            // stringOfResult += num;
-            // result.textContent = secondNum;
         }
         stringOfResult += num;
         result.textContent = stringOfResult;
@@ -36,30 +32,67 @@ signBtns.forEach((signBtn)=>{
             firstNum = Number(firstNum);
         }
 
-        if(sign === "add"){
-            operation = add;
-            stringOfResult += " + "
-
-        }else if(sign === "subtract"){
-            operation = subtract;
-            stringOfResult += " - "
-
-        }else if(sign === "multiply"){
-            operation = multiply;
-            stringOfResult += " × "
-            
-        }else if(sign === "divide"){
-            operation = divide;
-            stringOfResult += " ÷ "
-            
-        }else if(sign === "equal"){
-            //convert num2 to number
-            //do calculate and display it
+        if(firstNum && secondNum){
             secondNum = Number(secondNum);
-            stringOfResult = operate(operation, firstNum, secondNum);
-        }
-         result.textContent = stringOfResult;
 
+            if(sign === "equal"){
+                stringOfResult = operate(operation, firstNum, secondNum);
+                result.textContent = stringOfResult;
+                initialize()
+            }else{
+                firstNum = operate(operation, firstNum, secondNum);
+                secondNum = "";
+                operation = "";
+
+                //don't use dataset, use textcontent
+
+                stringOfResult = firstNum;
+                result.textContent = stringOfResult;
+            }
+            // = -> display the result
+            // the others -> continue calculate
+        }else{
+            switch(sign){
+                case "add":
+                    operation = add;
+                    stringOfResult += " + "
+                break;
+                case "subtract":
+                    operation = subtract;
+                    stringOfResult += " - "
+                break;
+                case "multiply":
+                    operation = multiply;
+                    stringOfResult += " × "
+                break;
+                case "divide":
+                    operation = divide;
+                    stringOfResult += " ÷ "
+                break;
+            }
+            result.textContent = stringOfResult;
+        }
+
+        // if(sign === "add"){
+        //     operation = add;
+        //     stringOfResult += " + "
+
+        // }else if(sign === "subtract"){
+        //     operation = subtract;
+        //     stringOfResult += " - "
+
+        // }else if(sign === "multiply"){
+        //     operation = multiply;
+        //     stringOfResult += " × "
+            
+        // }else if(sign === "divide"){
+        //     operation = divide;
+        //     stringOfResult += " ÷ "
+            
+        // }else if(sign === "equal"){
+        //     stringOfResult = operate(operation, firstNum, secondNum);
+        // }
+        //  result.textContent = stringOfResult;
     })
 })
 
@@ -81,8 +114,12 @@ const divide = (num1, num2)=>{
 }
 
 function operate(operator, num1, num2){
-    firstNum = operator(num1, num2);
-    secondNum = ""
+    const result = operator(num1, num2);
+    return result;
+}
+function initialize(){
+    firstNum = "";
+    secondNum = "";
     operation = "";
-    return firstNum;
+    stringOfResult = "";
 }
