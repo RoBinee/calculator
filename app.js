@@ -94,11 +94,21 @@ const divide = (num1, num2)=>{
 
 function operate(operator, num1, num2){
     //if operator is divide and num2 is 0 -> error!
-    const answer = operator(num1, num2);
-
+    let answer = operator(num1, num2);
     if(!Number.isFinite(answer)) return "error!";
 
-    return operator(num1, num2);
+    if(!Number.isInteger(answer)){
+        //it answer is float
+        //make number to string and split it by "."
+        let stringAnswer = answer.toString();
+        let answerArr = stringAnswer.split(".");
+        if(answerArr[1].length > 10){
+            //check if the decimal place is over 11
+            answer = answer.toFixed(10);
+        }
+        answer = Number(answer);
+    }
+    return answer;
 }
 
 const clearBtn = document.querySelector(".clear");
@@ -112,4 +122,3 @@ function initialize(){
     stringOfResult = "";
     result.textContent = stringOfResult;
 }
-
