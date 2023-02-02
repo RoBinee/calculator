@@ -134,3 +134,24 @@ function initialize(){
     stringOfResult = "";
     result.textContent = stringOfResult;
 }
+
+const backSpaceBtn = document.querySelector(".backspace");
+
+backSpaceBtn.addEventListener("click", ()=>{
+    if(firstNum && !signInput && !secondNum){
+        //backspace firstNum
+        firstNum = firstNum.slice(0, -1);
+        stringOfResult = stringOfResult.slice(0, -1);
+    }else if(firstNum && signInput && !secondNum){
+        //backspace signInput
+        signInput = "";
+        stringOfResult = firstNum;
+    }else if(firstNum && signInput && secondNum){
+        //backspace secondNum
+        secondNum = secondNum.slice(0, -1);
+        stringOfResult = stringOfResult.slice(0, -1);
+    }
+    //edit stringofREsult
+    //display it
+    result.textContent = stringOfResult;
+})
