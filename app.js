@@ -95,3 +95,15 @@ const divide = (num1, num2)=>{
 function operate(operator, num1, num2){
     return operator(num1, num2);
 }
+
+const clearBtn = document.querySelector(".clear");
+
+clearBtn.addEventListener("click", initialize)
+
+function initialize(){
+    firstNum = "";
+    secondNum = "";
+    signInput = "";
+    stringOfResult = "";
+    result.textContent = stringOfResult;
+}
