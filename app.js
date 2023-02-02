@@ -94,9 +94,10 @@ const divide = (num1, num2)=>{
 
 function operate(operator, num1, num2){
     //if operator is divide and num2 is 0 -> error!
-    if(operator === divide && num2 === 0){
-        return "error!";
-    }
+    const answer = operator(num1, num2);
+
+    if(!Number.isFinite(answer)) return "error!";
+
     return operator(num1, num2);
 }
 
