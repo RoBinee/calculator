@@ -4,11 +4,21 @@ let firstNum = "";
 let secondNum = "";
 let signInput = "";
 let stringOfResult = "";
+let decimalPointFlag = false;
 
 numberBtns.forEach((numberBtn)=>{
     numberBtn.addEventListener("click", ()=>{
         // const num = numberBtn.dataset.value;
         const num = numberBtn.textContent;
+
+        if(num === "."){
+            if(decimalPointFlag){
+                //you already put . and try to put more in one number
+                return;
+            }
+            decimalPointFlag = true;
+        }
+
         if(!signInput){
             firstNum += num;
         }else if(signInput){
@@ -26,6 +36,8 @@ signBtns.forEach((signBtn)=>{
     signBtn.addEventListener("click", ()=>{
         // const sign = signBtn.dataset.value;
         const sign = signBtn.textContent;
+
+        decimalPointFlag = false;
 
         if(typeof firstNum === "string"){
             //if firstNum is existed
