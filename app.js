@@ -7,7 +7,8 @@ let stringOfResult = "";
 
 numberBtns.forEach((numberBtn)=>{
     numberBtn.addEventListener("click", ()=>{
-        const num = numberBtn.dataset.value;
+        // const num = numberBtn.dataset.value;
+        const num = numberBtn.textContent;
         if(!signInput){
             firstNum += num;
         }else if(signInput){
@@ -23,7 +24,8 @@ const signBtns = document.querySelectorAll(".sign");
 
 signBtns.forEach((signBtn)=>{
     signBtn.addEventListener("click", ()=>{
-        const sign = signBtn.dataset.value;
+        // const sign = signBtn.dataset.value;
+        const sign = signBtn.textContent;
 
         if(typeof firstNum === "string"){
             //if firstNum is existed
@@ -51,19 +53,19 @@ signBtns.forEach((signBtn)=>{
         }
 
         switch(sign){
-            case "add":
+            case "+":
                 signInput = add;
                 stringOfResult += " + "
             break;
-            case "subtract":
+            case "-":
                 signInput = subtract;
                 stringOfResult += " - "
             break;
-            case "multiply":
+            case "×":
                 signInput = multiply;
                 stringOfResult += " × "
             break;
-            case "divide":
+            case "÷":
                 signInput = divide;
                 stringOfResult += " ÷ "
             break;
