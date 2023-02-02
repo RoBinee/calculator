@@ -11,18 +11,20 @@ numberBtns.forEach((numberBtn)=>{
         if(!signInput){
             firstNum += num;
         }else if(signInput){
-            //store second num
             secondNum += num;
         }
         stringOfResult += num;
+        //display the result
         result.textContent = stringOfResult;
     })
 })
 
 const signBtns = document.querySelectorAll(".sign");
+
 signBtns.forEach((signBtn)=>{
     signBtn.addEventListener("click", ()=>{
         const sign = signBtn.dataset.value;
+
         if(typeof firstNum === "string"){
             //if firstNum is existed
             firstNum = Number(firstNum);
@@ -31,16 +33,20 @@ signBtns.forEach((signBtn)=>{
         if(firstNum && secondNum){
             //click sign btn after complete writing secondNUm
             secondNum = Number(secondNum);
+
+            //2023.02.02
+            //calculate using num1, num2 and signInput
+            //save the result in firstNum
+            firstNum = operate(signInput, firstNum, secondNum);
+            stringOfResult = firstNum;
+
             if(sign === "equal"){
-                stringOfResult = operate(signInput, firstNum, secondNum);
-                result.textContent = stringOfResult;
-            }else{
-                firstNum = operate(signInput, firstNum, secondNum);
                 secondNum = "";
                 signInput = "";
-
-                stringOfResult = firstNum;
                 result.textContent = stringOfResult;
+                return;
+            }else{
+                secondNum = "";
             }
         }
 
@@ -62,6 +68,7 @@ signBtns.forEach((signBtn)=>{
                 stringOfResult += " ÷ "
             break;
         }
+            //display the result
             result.textContent = stringOfResult;
     })
 })
