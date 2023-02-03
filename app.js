@@ -149,22 +149,29 @@ function initialize(){
 const backSpaceBtn = document.querySelector(".backspace");
 
 backSpaceBtn.addEventListener("click", ()=>{
-    // edit for readable!!
     // firstNum and stringOfResult should be string for slice func
-    if(firstNum && !signInput && !secondNum){
+    if(!signInput && !secondNum){
         //backspace firstNum
-        firstNum = firstNum.slice(0, -1);
-        stringOfResult = stringOfResult.slice(0, -1);
-    }else if(firstNum && signInput && !secondNum){
+        removeLastChar("first");
+    }else if(signInput && !secondNum){
         //backspace signInput
         signInput = "";
         stringOfResult = firstNum;
-    }else if(firstNum && signInput && secondNum){
+    }else if(signInput && secondNum){
         //backspace secondNum
-        secondNum = secondNum.slice(0, -1);
-        stringOfResult = stringOfResult.slice(0, -1);
+        removeLastChar("second");
     }
+
     //edit stringofREsult
     //display it
     result.textContent = stringOfResult;
 })
+
+function removeLastChar(numberName){
+    if(numberName === "first"){
+        firstNum = firstNum.slice(0, -1);
+    }else if(numberName === "second"){
+        secondNum = secondNum.slice(0, -1);
+    }
+    stringOfResult = stringOfResult.slice(0, -1);
+}
