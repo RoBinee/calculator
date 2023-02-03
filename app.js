@@ -37,44 +37,85 @@ signBtns.forEach((signBtn)=>{
     signBtn.addEventListener("click", ()=>{
         const sign = signBtn.textContent;
 
-        decimalPointFlag = false;
-        if(firstNum && secondNum){
-            //2023.02.02
-            //calculate using num1, num2 and signInput
-            //save the result in firstNum
-            firstNum = operate(signInput, firstNum, secondNum);
-            stringOfResult = firstNum;
-            if(sign === "="){
-                secondNum = "";
-                signInput = "";
-                displayResult();
-                return;
-            }else{
-                secondNum = "";
-            }
-        }
+        typingSign(sign);
 
-        switch(sign){
-            case "+":
-                signInput = add;
-                stringOfResult += " + "
-            break;
-            case "-":
-                signInput = subtract;
-                stringOfResult += " - "
-            break;
-            case "×":
-                signInput = multiply;
-                stringOfResult += " × "
-            break;
-            case "÷":
-                signInput = divide;
-                stringOfResult += " ÷ "
-            break;
-        }
-            displayResult();
+        // decimalPointFlag = false;
+        // if(firstNum && secondNum){
+        //     //2023.02.02
+        //     //calculate using num1, num2 and signInput
+        //     //save the result in firstNum
+        //     firstNum = operate(signInput, firstNum, secondNum);
+        //     stringOfResult = firstNum;
+        //     if(sign === "="){
+        //         secondNum = "";
+        //         signInput = "";
+        //         displayResult();
+        //         return;
+        //     }else{
+        //         secondNum = "";
+        //     }
+        // }
+
+        // switch(sign){
+        //     case "+":
+        //         signInput = add;
+        //         stringOfResult += " + "
+        //     break;
+        //     case "-":
+        //         signInput = subtract;
+        //         stringOfResult += " - "
+        //     break;
+        //     case "×":
+        //         signInput = multiply;
+        //         stringOfResult += " × "
+        //     break;
+        //     case "÷":
+        //         signInput = divide;
+        //         stringOfResult += " ÷ "
+        //     break;
+        // }
+        //     displayResult();
     })
 })
+
+function typingSign(sign){
+    decimalPointFlag = false;
+    if(firstNum && secondNum){
+        //2023.02.02
+        //calculate using num1, num2 and signInput
+        //save the result in firstNum
+        firstNum = operate(signInput, firstNum, secondNum);
+        stringOfResult = firstNum;
+        if(sign === "="){
+            secondNum = "";
+            signInput = "";
+            displayResult();
+            return;
+        }else{
+            secondNum = "";
+        }
+    }
+
+    switch(sign){
+        case "+":
+            signInput = add;
+            stringOfResult += " + "
+        break;
+        case "-":
+            signInput = subtract;
+            stringOfResult += " - "
+        break;
+        case "×":
+            signInput = multiply;
+            stringOfResult += " × "
+        break;
+        case "÷":
+            signInput = divide;
+            stringOfResult += " ÷ "
+        break;
+    }
+        displayResult();
+}
 
 
 const add = (num1, num2)=>{
@@ -132,7 +173,9 @@ function initialize(){
 
 const backSpaceBtn = document.querySelector(".backspace");
 
-backSpaceBtn.addEventListener("click", ()=>{
+backSpaceBtn.addEventListener("click", eraser)
+
+function eraser(){
     // firstNum and stringOfResult should be string for slice func
     if(!signInput && !secondNum){
         //backspace firstNum
@@ -146,7 +189,7 @@ backSpaceBtn.addEventListener("click", ()=>{
         removeLastChar("second");
     }
     displayResult()
-})
+}
 
 function removeLastChar(numberName){
     if(numberName === "first"){
@@ -164,6 +207,10 @@ function displayResult(){
 
 // when press a key
 window.addEventListener("keydown", (e)=>{
-    const num = e.key;
-    typingNumber(num);
+    //you should use key rather than keyCode
+    const inputKey = e.key;
+    console.log(inputKey);
+    console.log(e.shiftKey);
+    //inputKey -> 0 1 2.... 9 -> typingNum
+    //inputKey -> + - * % = ... -> typingSign
 })
