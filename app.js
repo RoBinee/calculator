@@ -9,51 +9,41 @@ let decimalPointFlag = false;
 numberBtns.forEach((numberBtn)=>{
     numberBtn.addEventListener("click", ()=>{
         const num = numberBtn.textContent;
-        //!string
-
-        if(num === "."){
-            if(decimalPointFlag){
-                //you already put . and try to put more in one number
-                return;
-            }
-            decimalPointFlag = true;
-        }
-
-        if(!signInput){
-            firstNum += num;
-        }else if(signInput){
-            secondNum += num;
-        }
-        stringOfResult += num;
-        displayResult();
-    })
+        typingNumber(num);
+     })
 })
+
+function typingNumber(num){
+    if(num === "."){
+        if(decimalPointFlag){
+            //you already put . and try to put more in one number
+            return;
+        }
+        decimalPointFlag = true;
+    }
+
+    if(!signInput){
+        firstNum += num;
+    }else if(signInput){
+        secondNum += num;
+    }
+    stringOfResult += num;
+    displayResult();
+}
 
 const signBtns = document.querySelectorAll(".sign");
 
 signBtns.forEach((signBtn)=>{
     signBtn.addEventListener("click", ()=>{
-        // const sign = signBtn.dataset.value;
         const sign = signBtn.textContent;
 
         decimalPointFlag = false;
-
-        // if(typeof firstNum === "string"){
-        //     firstNum = Number(firstNum);
-        // }
-
         if(firstNum && secondNum){
-            //click sign btn after complete writing secondNUm
-
-            // secondNum = Number(secondNum);
-
             //2023.02.02
             //calculate using num1, num2 and signInput
             //save the result in firstNum
             firstNum = operate(signInput, firstNum, secondNum);
             stringOfResult = firstNum;
-            //stringOfREsult should be string... fix it!!
-
             if(sign === "="){
                 secondNum = "";
                 signInput = "";
@@ -108,9 +98,9 @@ function operate(operator, num1, num2){
     num1 = Number(num1);
     num2 = Number(num2);
 
-    //if operator is divide and num2 is 0 -> error!
-    let answer = operator(num1, num2);
     //answer is number
+    let answer = operator(num1, num2);
+    //if operator is divide and num2 is 0 -> error!
     if(!Number.isFinite(answer)) return "error!";
 
     if(!Number.isInteger(answer)){
@@ -171,3 +161,9 @@ function displayResult(){
     result.textContent = stringOfResult;
     return;
 }
+
+// when press a key
+window.addEventListener("keydown", (e)=>{
+    const num = e.key;
+    typingNumber(num);
+})
