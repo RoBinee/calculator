@@ -21,16 +21,11 @@ numberBtns.forEach((numberBtn)=>{
 
         if(!signInput){
             firstNum += num;
-        //!string
         }else if(signInput){
             secondNum += num;
-        //!string
         }
         stringOfResult += num;
-        //!string
-
-        //display the result
-        result.textContent = stringOfResult;
+        displayResult();
     })
 })
 
@@ -62,7 +57,7 @@ signBtns.forEach((signBtn)=>{
             if(sign === "="){
                 secondNum = "";
                 signInput = "";
-                result.textContent = stringOfResult;
+                displayResult();
                 return;
             }else{
                 secondNum = "";
@@ -87,8 +82,7 @@ signBtns.forEach((signBtn)=>{
                 stringOfResult += " ÷ "
             break;
         }
-            //display the result
-            result.textContent = stringOfResult;
+            displayResult();
     })
 })
 
@@ -161,10 +155,7 @@ backSpaceBtn.addEventListener("click", ()=>{
         //backspace secondNum
         removeLastChar("second");
     }
-
-    //edit stringofREsult
-    //display it
-    result.textContent = stringOfResult;
+    displayResult()
 })
 
 function removeLastChar(numberName){
@@ -174,4 +165,9 @@ function removeLastChar(numberName){
         secondNum = secondNum.slice(0, -1);
     }
     stringOfResult = stringOfResult.slice(0, -1);
+}
+
+function displayResult(){
+    result.textContent = stringOfResult;
+    return;
 }
