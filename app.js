@@ -38,43 +38,6 @@ signBtns.forEach((signBtn)=>{
         const sign = signBtn.textContent;
 
         typingSign(sign);
-
-        // decimalPointFlag = false;
-        // if(firstNum && secondNum){
-        //     //2023.02.02
-        //     //calculate using num1, num2 and signInput
-        //     //save the result in firstNum
-        //     firstNum = operate(signInput, firstNum, secondNum);
-        //     stringOfResult = firstNum;
-        //     if(sign === "="){
-        //         secondNum = "";
-        //         signInput = "";
-        //         displayResult();
-        //         return;
-        //     }else{
-        //         secondNum = "";
-        //     }
-        // }
-
-        // switch(sign){
-        //     case "+":
-        //         signInput = add;
-        //         stringOfResult += " + "
-        //     break;
-        //     case "-":
-        //         signInput = subtract;
-        //         stringOfResult += " - "
-        //     break;
-        //     case "×":
-        //         signInput = multiply;
-        //         stringOfResult += " × "
-        //     break;
-        //     case "÷":
-        //         signInput = divide;
-        //         stringOfResult += " ÷ "
-        //     break;
-        // }
-        //     displayResult();
     })
 })
 
@@ -209,8 +172,24 @@ function displayResult(){
 window.addEventListener("keydown", (e)=>{
     //you should use key rather than keyCode
     const inputKey = e.key;
-    console.log(inputKey);
-    console.log(e.shiftKey);
-    //inputKey -> 0 1 2.... 9 -> typingNum
-    //inputKey -> + - * % = ... -> typingSign
+    const shift = e.shiftKey;//boolean
+
+    if(shift){
+        typingSign(inputKey);
+    }else if(!shift){
+
+        switch(inputKey){
+            case "Backspace":
+                eraser();
+            break;
+            case "Enter":
+                typingSign("=");
+            break;
+            case "-":
+                typingSign("-");
+            break;
+            default:
+                typingNumber(inputKey);
+        }
+    }
 })
