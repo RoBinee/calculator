@@ -175,9 +175,17 @@ window.addEventListener("keydown", (e)=>{
     const shift = e.shiftKey;//boolean
 
     if(shift){
-        typingSign(inputKey);
+        switch(inputKey){
+            case "*":
+                typingSign("×");
+            break;
+            case "%":
+                typingSign("÷");
+            break;
+            default:
+                typingSign(inputKey);
+        }
     }else if(!shift){
-
         switch(inputKey){
             case "Backspace":
                 eraser();
