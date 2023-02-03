@@ -35,7 +35,8 @@ const signBtns = document.querySelectorAll(".sign");
 
 signBtns.forEach((signBtn)=>{
     signBtn.addEventListener("click", ()=>{
-        const sign = signBtn.textContent;
+        // const sign = signBtn.textContent;
+        const sign = signBtn.dataset.value;
 
         typingSign(sign);
     })
@@ -58,7 +59,7 @@ function typingSign(sign){
             secondNum = "";
         }
     }
-
+    //edit here
     switch(sign){
         case "+":
             signInput = add;
@@ -68,11 +69,11 @@ function typingSign(sign){
             signInput = subtract;
             stringOfResult += " - "
         break;
-        case "×":
+        case "*":
             signInput = multiply;
             stringOfResult += " × "
         break;
-        case "÷":
+        case "/":
             signInput = divide;
             stringOfResult += " ÷ "
         break;
@@ -175,29 +176,14 @@ window.addEventListener("keydown", (e)=>{
     const shift = e.shiftKey;//boolean
 
     if(shift){
-        switch(inputKey){
-            case "*":
-                typingSign("×");
-            break;
-            case "%":
-                typingSign("÷");
-            break;
-            default:
-                typingSign(inputKey);
-        }
+        typingSign(inputKey);
     }else if(!shift){
-        switch(inputKey){
-            case "Backspace":
-                eraser();
-            break;
-            case "Enter":
-                typingSign("=");
-            break;
-            case "-":
-                typingSign("-");
-            break;
-            default:
-                typingNumber(inputKey);
+        if(inputKey === "Backspace"){
+            eraser()
+        }else if(inputKey === "Enter" || inputKey === "/" || inputKey === "-"){
+            typingSign(inputKey);
+        }else{
+            typingNumber(inputKey);
         }
     }
 })
