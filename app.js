@@ -175,6 +175,8 @@ window.addEventListener("keydown", (e)=>{
     const inputKey = e.key;
     const shift = e.shiftKey;//boolean
 
+    //check if you press weird key
+
     if(shift){
         typingSign(inputKey);
     }else if(!shift){
@@ -186,4 +188,5 @@ window.addEventListener("keydown", (e)=>{
             typingNumber(inputKey);
         }
     }
+
 })
