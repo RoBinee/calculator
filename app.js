@@ -8,8 +8,8 @@ let decimalPointFlag = false;
 
 numberBtns.forEach((numberBtn)=>{
     numberBtn.addEventListener("click", ()=>{
-        // const num = numberBtn.dataset.value;
         const num = numberBtn.textContent;
+        //!string
 
         if(num === "."){
             if(decimalPointFlag){
@@ -21,10 +21,14 @@ numberBtns.forEach((numberBtn)=>{
 
         if(!signInput){
             firstNum += num;
+        //!string
         }else if(signInput){
             secondNum += num;
+        //!string
         }
         stringOfResult += num;
+        //!string
+
         //display the result
         result.textContent = stringOfResult;
     })
@@ -39,22 +43,23 @@ signBtns.forEach((signBtn)=>{
 
         decimalPointFlag = false;
 
-        if(typeof firstNum === "string"){
-            //if firstNum is existed
-            firstNum = Number(firstNum);
-        }
+        // if(typeof firstNum === "string"){
+        //     firstNum = Number(firstNum);
+        // }
 
         if(firstNum && secondNum){
             //click sign btn after complete writing secondNUm
-            secondNum = Number(secondNum);
+
+            // secondNum = Number(secondNum);
 
             //2023.02.02
             //calculate using num1, num2 and signInput
             //save the result in firstNum
             firstNum = operate(signInput, firstNum, secondNum);
             stringOfResult = firstNum;
+            //stringOfREsult should be string... fix it!!
 
-            if(sign === "equal"){
+            if(sign === "="){
                 secondNum = "";
                 signInput = "";
                 result.textContent = stringOfResult;
@@ -105,8 +110,13 @@ const divide = (num1, num2)=>{
 }
 
 function operate(operator, num1, num2){
+    //convert to number all
+    num1 = Number(num1);
+    num2 = Number(num2);
+
     //if operator is divide and num2 is 0 -> error!
     let answer = operator(num1, num2);
+    //answer is number
     if(!Number.isFinite(answer)) return "error!";
 
     if(!Number.isInteger(answer)){
@@ -118,10 +128,11 @@ function operate(operator, num1, num2){
             //check if the decimal place is over 11
             answer = answer.toFixed(10);
         }
-        answer = Number(answer);
     }
-    return answer;
+    //if answer is integer, it needs to be converted as string
+    return answer.toString();
 }
+
 
 const clearBtn = document.querySelector(".clear");
 
@@ -138,6 +149,8 @@ function initialize(){
 const backSpaceBtn = document.querySelector(".backspace");
 
 backSpaceBtn.addEventListener("click", ()=>{
+    // edit for readable!!
+    // firstNum and stringOfResult should be string for slice func
     if(firstNum && !signInput && !secondNum){
         //backspace firstNum
         firstNum = firstNum.slice(0, -1);
